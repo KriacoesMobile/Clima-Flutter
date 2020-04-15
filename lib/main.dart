@@ -1,6 +1,7 @@
+import 'package:clima/screens/loading_screen.dart';
+import 'package:clima/screens/weather_information.dart';
 import 'package:clima/utilities/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:clima/screens/weather_information.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         backgroundColor: kBackgroundColor,
       ),
-      home: WeatherInformation(),
+      home: LoadingScreen(),
     );
   }
 }
