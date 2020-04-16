@@ -34,9 +34,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
     NetworkHelper networkHelper = NetworkHelper(apiURL);
     var weatherData = await networkHelper.getData();
 
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return WeatherInformation(weatherData);
-    }));
+    // Navigator.push(context, MaterialPageRoute(builder: (context) {
+    //   return WeatherInformation(weatherData);
+    // }));
   }
 
   @override
@@ -47,15 +47,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Icon(
-              FontAwesomeIcons.cloud,
-              size: 80.0,
+              FontAwesomeIcons.cloudMoon,
+              size: 100.0,
               color: kPrimaryFontColor,
             ),
-            SizedBox(height: 15.0),
+            SizedBox(height: 25.0),
             Text(
               'Clima',
               style: kRegularTextStyle.copyWith(
-                fontSize: 50.0,
+                fontSize: 60.0,
                 color: kPrimaryFontColor,
               ),
             ),

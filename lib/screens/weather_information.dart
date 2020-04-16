@@ -14,7 +14,7 @@ class WeatherInformation extends StatefulWidget {
 
 class _WeatherInformationState extends State<WeatherInformation> {
   double temperature;
-  int feelsLike;
+  double feelsLike;
   String cityName;
   String description;
 
@@ -51,7 +51,7 @@ class _WeatherInformationState extends State<WeatherInformation> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            'Jan 13, 2019',
+                            's',
                             style: kRegularTextStyle.copyWith(
                               fontSize: 20.0,
                               color: kSecondaryFontColor,
@@ -94,7 +94,7 @@ class _WeatherInformationState extends State<WeatherInformation> {
                       ),
                       SizedBox(height: 15.0),
                       Text(
-                        'Feels like $feelsLikeº',
+                        'Feels like ${feelsLike.round()}º',
                         style: kRegularTextStyle.copyWith(
                           fontSize: 20.0,
                           color: kSecondaryFontColor,
