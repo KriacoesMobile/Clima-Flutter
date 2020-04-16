@@ -1,5 +1,6 @@
 import 'package:clima/utilities/capitalize.dart';
 import 'package:clima/utilities/constants.dart';
+import 'package:clima/utilities/current_time.dart';
 import 'package:clima/widgets/refresh_button.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,7 @@ class _WeatherInformationState extends State<WeatherInformation> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            's',
+                            getCurrentDateTime(),
                             style: kRegularTextStyle.copyWith(
                               fontSize: 20.0,
                               color: kSecondaryFontColor,
