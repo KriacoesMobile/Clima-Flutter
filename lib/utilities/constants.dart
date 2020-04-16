@@ -13,3 +13,5 @@ const kExtraBoldTextStyle = TextStyle(
   fontFamily: 'Monserrat',
   fontWeight: FontWeight.w800,
 );
+
+const apiKey = '32452a409b71df9fc4552e7915b13a43';

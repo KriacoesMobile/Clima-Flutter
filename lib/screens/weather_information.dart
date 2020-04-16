@@ -1,13 +1,36 @@
+import 'package:clima/utilities/capitalize.dart';
 import 'package:clima/utilities/constants.dart';
 import 'package:clima/widgets/refresh_button.dart';
 import 'package:flutter/material.dart';
 
 class WeatherInformation extends StatefulWidget {
+  WeatherInformation(this.locationWeather);
+
+  final locationWeather;
+
   @override
   _WeatherInformationState createState() => _WeatherInformationState();
 }
 
 class _WeatherInformationState extends State<WeatherInformation> {
+  double temperature;
+  int feelsLike;
+  String cityName;
+  String description;
+
+  @override
+  void initState() {
+    super.initState();
+    assignData();
+  }
+
+  assignData() {
+    temperature = widget.locationWeather['main']['temp'];
+    cityName = widget.locationWeather['name'];
+    feelsLike = widget.locationWeather['main']['feels_like'];
+    description = widget.locationWeather['weather'][0]['description'];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,13 +53,17 @@ class _WeatherInformationState extends State<WeatherInformation> {
                           Text(
                             'Jan 13, 2019',
                             style: kRegularTextStyle.copyWith(
-                                fontSize: 20.0, color: kSecondaryFontColor),
+                              fontSize: 20.0,
+                              color: kSecondaryFontColor,
+                            ),
                           ),
                           SizedBox(height: 6.0),
                           Text(
-                            'New York, NY',
+                            cityName,
                             style: kExtraBoldTextStyle.copyWith(
-                                fontSize: 20.0, color: kPrimaryFontColor),
+                              fontSize: 20.0,
+                              color: kPrimaryFontColor,
+                            ),
                           ),
                         ],
                       ),
@@ -51,17 +78,27 @@ class _WeatherInformationState extends State<WeatherInformation> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('74º',
-                          style: kExtraBoldTextStyle.copyWith(
-                              fontSize: 80.0, color: kPrimaryFontColor)),
-                      Text('Heavy rain',
-                          style: kRegularTextStyle.copyWith(
-                              fontSize: 45.0, color: kPrimaryFontColor)),
+                      Text(
+                        '${temperature.round()}º',
+                        style: kExtraBoldTextStyle.copyWith(
+                          fontSize: 80.0,
+                          color: kPrimaryFontColor,
+                        ),
+                      ),
+                      Text(
+                        capitalize(description),
+                        style: kRegularTextStyle.copyWith(
+                          fontSize: 45.0,
+                          color: kPrimaryFontColor,
+                        ),
+                      ),
                       SizedBox(height: 15.0),
                       Text(
-                        'Feels like 69º',
+                        'Feels like $feelsLikeº',
                         style: kRegularTextStyle.copyWith(
-                            fontSize: 20.0, color: kSecondaryFontColor),
+                          fontSize: 20.0,
+                          color: kSecondaryFontColor,
+                        ),
                       ),
                     ],
                   ),

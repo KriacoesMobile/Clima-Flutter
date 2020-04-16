@@ -1,5 +1,5 @@
 import 'package:clima/screens/loading_screen.dart';
-import 'package:clima/screens/weather_information.dart';
+// import 'package:clima/screens/weather_information.dart';
 import 'package:clima/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
