@@ -52,128 +52,125 @@ class _WeatherInformationState extends State<WeatherInformation> {
           padding: const EdgeInsets.all(35.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Expanded(
-                child: Container(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            getCurrentDateTime(),
-                            style: kRegularTextStyle.copyWith(
-                              fontSize: 20.0,
-                              color: kSecondaryFontColor,
-                            ),
+                flex: 1,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          getCurrentDateTime(),
+                          style: kRegularTextStyle.copyWith(
+                            fontSize: 20.0,
+                            color: kSecondaryFontColor,
                           ),
-                          SizedBox(height: 6.0),
-                          Text(
-                            cityName,
-                            style: kExtraBoldTextStyle.copyWith(
-                              fontSize: 20.0,
-                              color: kPrimaryFontColor,
-                            ),
+                        ),
+                        SizedBox(height: 6.0),
+                        Text(
+                          cityName,
+                          style: kExtraBoldTextStyle.copyWith(
+                            fontSize: 20.0,
+                            color: kPrimaryFontColor,
                           ),
-                        ],
-                      ),
-                      RefreshButton(onPress: () async {
-                        var weatherData = WeatherData().getLocationData();
-                        updateData(weatherData);
-                      }),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                    RefreshButton(onPress: () async {
+                      var weatherData = WeatherData().getLocationData();
+                      updateData(weatherData);
+                    }),
+                  ],
                 ),
               ),
               Expanded(
                 flex: 2,
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '${temperature.round()}º',
-                        style: kExtraBoldTextStyle.copyWith(
-                          fontSize: 80.0,
-                          color: kPrimaryFontColor,
-                        ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      '${temperature.round()}º',
+                      style: kExtraBoldTextStyle.copyWith(
+                        fontSize: 80.0,
+                        color: kPrimaryFontColor,
                       ),
-                      Text(
-                        capitalize(description),
-                        style: kRegularTextStyle.copyWith(
-                          fontSize: 45.0,
-                          color: kPrimaryFontColor,
-                        ),
+                    ),
+                    Text(
+                      capitalize(description),
+                      style: kRegularTextStyle.copyWith(
+                        fontSize: 45.0,
+                        color: kPrimaryFontColor,
                       ),
-                      SizedBox(height: 15.0),
-                      Text(
-                        'Feels like $feelsLikeº',
-                        style: kRegularTextStyle.copyWith(
-                          fontSize: 20.0,
-                          color: kSecondaryFontColor,
-                        ),
+                    ),
+                    SizedBox(height: 15.0),
+                    Text(
+                      'Feels like $feelsLikeº',
+                      style: kRegularTextStyle.copyWith(
+                        fontSize: 20.0,
+                        color: kSecondaryFontColor,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               Expanded(
                 flex: 1,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Another location?',
+                      'Search for other locations',
                       style: kRegularTextStyle.copyWith(
                         fontSize: 20.0,
                         color: kPrimaryFontColor,
                       ),
                     ),
-                    Expanded(
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 3,
-                            child: Container(
-                              child: TextField(
-                                textCapitalization:
-                                    TextCapitalization.sentences,
-                                enableSuggestions: true,
-                                enableInteractiveSelection: true,
-                                textAlign: TextAlign.center,
-                                showCursor: false,
-                                style: kRegularTextStyle.copyWith(
-                                    fontSize: 18.0, color: kBackgroundColor),
-                                decoration: kTextFieldDecoration,
-                                onChanged: (input) {
-                                  if (input != null && input != '') {
-                                    userInput = input;
-                                    print(userInput);
-                                  }
-                                },
-                              ),
+                    SizedBox(height: 20.0),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 5,
+                          child: Container(
+                            child: TextField(
+                              textCapitalization: TextCapitalization.sentences,
+                              enableSuggestions: true,
+                              enableInteractiveSelection: true,
+                              textAlign: TextAlign.center,
+                              showCursor: false,
+                              style: kRegularTextStyle.copyWith(
+                                  fontSize: 18.0, color: kBackgroundColor),
+                              decoration: kTextFieldDecoration,
+                              onChanged: (input) {
+                                if (input != null && input != '') {
+                                  userInput = input;
+                                }
+                              },
                             ),
                           ),
-                          SizedBox(width: 15.0),
-                          Expanded(
-                            flex: 1,
-                            child: RaisedButton(
-                                color: kPrimaryFontColor,
-                                child: Icon(
-                                  FontAwesomeIcons.search,
-                                  size: 25.0,
-                                  color: kBackgroundColor,
-                                ),
-                                elevation: 0.0,
-                                onPressed: () {
-                                  var weatherData =
-                                      WeatherData().getLocationData();
-                                  updateData(weatherData);
-                                }),
-                          )
-                        ],
-                      ),
+                        ),
+                        SizedBox(width: 15.0),
+                        Expanded(
+                          flex: 1,
+                          child: RaisedButton(
+                              padding: EdgeInsets.symmetric(vertical: 12.0),
+                              color: kPrimaryFontColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Icon(FontAwesomeIcons.search,
+                                  size: 25.0, color: kBackgroundColor),
+                              elevation: 0.0,
+                              onPressed: () async {
+                                var weatherData =
+                                    await WeatherData().getCityData(userInput);
+                                updateData(weatherData);
+                              }),
+                        )
+                      ],
                     )
                   ],
                 ),

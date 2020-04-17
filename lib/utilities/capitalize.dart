@@ -1,6 +1,6 @@
 String capitalize(String string) {
   if (string == null) {
-    throw ArgumentError("string: $string");
+    throw ArgumentError('string: $string');
   }
 
   if (string.isEmpty) {
