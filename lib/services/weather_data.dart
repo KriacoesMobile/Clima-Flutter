@@ -17,4 +17,12 @@ class WeatherData {
     NetworkHelper networkHelper = NetworkHelper(apiURL);
     return await networkHelper.getData();
   }
+
+  Future<dynamic> getCityData(String cityName) async {
+    String apiURL =
+        'https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$apiKey&units=metric';
+
+    NetworkHelper networkHelper = NetworkHelper(apiURL);
+    return await networkHelper.getData();
+  }
 }

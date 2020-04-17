@@ -9,8 +9,7 @@ class WeatherApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
-        
-        scaffoldBackgroundColor: kBackgroundColor
+        scaffoldBackgroundColor: kBackgroundColor,
       ),
       home: LoadingScreen(),
     );

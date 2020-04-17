@@ -1,3 +1,4 @@
+import 'package:clima/screens/error_screen.dart';
 import 'package:clima/screens/weather_information.dart';
 import 'package:clima/services/weather_data.dart';
 import 'package:clima/utilities/constants.dart';
@@ -19,9 +20,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void getWeatherData() async {
     var weatherData = await WeatherData().getLocationData();
 
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return WeatherInformation(weatherData: weatherData);
-    }));
+    if (weatherData != null) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return WeatherInformation(weatherData: weatherData);
+      }));
+    } else {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return ErrorScreen();
+      }));
+    }
   }
 
   @override

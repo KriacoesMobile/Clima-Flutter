@@ -1,9 +1,11 @@
+import 'package:clima/screens/error_screen.dart';
 import 'package:clima/services/weather_data.dart';
 import 'package:clima/utilities/capitalize.dart';
 import 'package:clima/utilities/constants.dart';
 import 'package:clima/utilities/current_time.dart';
 import 'package:clima/widgets/refresh_button.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WeatherInformation extends StatefulWidget {
   WeatherInformation({this.weatherData});
@@ -16,9 +18,10 @@ class WeatherInformation extends StatefulWidget {
 
 class _WeatherInformationState extends State<WeatherInformation> {
   double temperature;
-  double feelsLike;
+  String feelsLike;
   String cityName;
   String description;
+  String userInput;
 
   @override
   void initState() {
@@ -27,12 +30,18 @@ class _WeatherInformationState extends State<WeatherInformation> {
   }
 
   void updateData(var weatherData) {
-    setState(() {
-      temperature = weatherData['main']['temp'];
-      cityName = weatherData['name'];
-      feelsLike = weatherData['main']['feels_like'];
-      description = weatherData['weather'][0]['description'];
-    });
+    if (weatherData != null) {
+      setState(() {
+        temperature = weatherData['main']['temp'];
+        cityName = weatherData['name'];
+        feelsLike = weatherData['main']['feels_like'].toString();
+        description = weatherData['weather'][0]['description'];
+      });
+    } else {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return ErrorScreen();
+      }));
+    }
   }
 
   @override
@@ -45,7 +54,6 @@ class _WeatherInformationState extends State<WeatherInformation> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Expanded(
-                flex: 1,
                 child: Container(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +79,7 @@ class _WeatherInformationState extends State<WeatherInformation> {
                           ),
                         ],
                       ),
-                      RefreshButton(onPress: () {
+                      RefreshButton(onPress: () async {
                         var weatherData = WeatherData().getLocationData();
                         updateData(weatherData);
                       }),
@@ -80,7 +88,7 @@ class _WeatherInformationState extends State<WeatherInformation> {
                 ),
               ),
               Expanded(
-                flex: 5,
+                flex: 2,
                 child: Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +109,7 @@ class _WeatherInformationState extends State<WeatherInformation> {
                       ),
                       SizedBox(height: 15.0),
                       Text(
-                        'Feels like ${feelsLike.round()}º',
+                        'Feels like $feelsLikeº',
                         style: kRegularTextStyle.copyWith(
                           fontSize: 20.0,
                           color: kSecondaryFontColor,
@@ -111,6 +119,65 @@ class _WeatherInformationState extends State<WeatherInformation> {
                   ),
                 ),
               ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'Another location?',
+                      style: kRegularTextStyle.copyWith(
+                        fontSize: 20.0,
+                        color: kPrimaryFontColor,
+                      ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            flex: 3,
+                            child: Container(
+                              child: TextField(
+                                textCapitalization:
+                                    TextCapitalization.sentences,
+                                enableSuggestions: true,
+                                enableInteractiveSelection: true,
+                                textAlign: TextAlign.center,
+                                showCursor: false,
+                                style: kRegularTextStyle.copyWith(
+                                    fontSize: 18.0, color: kBackgroundColor),
+                                decoration: kTextFieldDecoration,
+                                onChanged: (input) {
+                                  if (input != null && input != '') {
+                                    userInput = input;
+                                    print(userInput);
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 15.0),
+                          Expanded(
+                            flex: 1,
+                            child: RaisedButton(
+                                color: kPrimaryFontColor,
+                                child: Icon(
+                                  FontAwesomeIcons.search,
+                                  size: 25.0,
+                                  color: kBackgroundColor,
+                                ),
+                                elevation: 0.0,
+                                onPressed: () {
+                                  var weatherData =
+                                      WeatherData().getLocationData();
+                                  updateData(weatherData);
+                                }),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),
