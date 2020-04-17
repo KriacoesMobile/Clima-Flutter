@@ -1,3 +1,4 @@
+import 'package:clima/services/weather_data.dart';
 import 'package:clima/utilities/capitalize.dart';
 import 'package:clima/utilities/constants.dart';
 import 'package:clima/utilities/current_time.dart';
@@ -5,9 +6,9 @@ import 'package:clima/widgets/refresh_button.dart';
 import 'package:flutter/material.dart';
 
 class WeatherInformation extends StatefulWidget {
-  WeatherInformation(this.locationWeather);
+  WeatherInformation({this.weatherData});
 
-  final locationWeather;
+  final weatherData;
 
   @override
   _WeatherInformationState createState() => _WeatherInformationState();
@@ -22,14 +23,16 @@ class _WeatherInformationState extends State<WeatherInformation> {
   @override
   void initState() {
     super.initState();
-    assignData();
+    updateData(widget.weatherData);
   }
 
-  assignData() {
-    temperature = widget.locationWeather['main']['temp'];
-    cityName = widget.locationWeather['name'];
-    feelsLike = widget.locationWeather['main']['feels_like'];
-    description = widget.locationWeather['weather'][0]['description'];
+  void updateData(var weatherData) {
+    setState(() {
+      temperature = weatherData['main']['temp'];
+      cityName = weatherData['name'];
+      feelsLike = weatherData['main']['feels_like'];
+      description = weatherData['weather'][0]['description'];
+    });
   }
 
   @override
@@ -68,7 +71,10 @@ class _WeatherInformationState extends State<WeatherInformation> {
                           ),
                         ],
                       ),
-                      RefreshButton(),
+                      RefreshButton(onPress: () {
+                        var weatherData = WeatherData().getLocationData();
+                        updateData(weatherData);
+                      }),
                     ],
                   ),
                 ),
