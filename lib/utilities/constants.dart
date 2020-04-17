@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-const kBackgroundColor = Color(0xFF323339);
-const kPrimaryFontColor = Color(0xFFF9F8F9);
-const kSecondaryFontColor = Color(0xFF5C5D63);
+const kBackgroundColor = Color(0xFF222831);
+const kPrimaryFontColor = Color(0xFFf0f5f9);
+const kSecondaryFontColor = Color(0xFFc9d6df);
 
 const kRegularTextStyle = TextStyle(
   fontFamily: 'Monserrat',
