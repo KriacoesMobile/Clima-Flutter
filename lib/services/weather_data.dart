@@ -8,13 +8,15 @@ class WeatherData {
     Location location = Location();
     await location.getCurrentPosition();
 
-    double latitude = location.latitude;
-    double longitude = location.longitude;
+    if ((location.latitude == null) || (location.longitude == null)) {
+      return null;
+    }
 
     String apiURL =
-        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric';
+        'https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=metric';
 
     NetworkHelper networkHelper = NetworkHelper(apiURL);
+
     return await networkHelper.getData();
   }
 

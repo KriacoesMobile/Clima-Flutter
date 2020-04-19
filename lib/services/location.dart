@@ -7,11 +7,12 @@ class Location {
   Future<void> getCurrentPosition() async {
     try {
       var position = await Geolocator()
-          .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+          .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
       latitude = position.latitude;
       longitude = position.longitude;
     } catch (exception) {
-      throw ArgumentError('exception: $exception');
+      latitude = null;
+      longitude = null;
     }
   }
 }

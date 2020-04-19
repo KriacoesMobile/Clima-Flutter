@@ -9,8 +9,8 @@ class RefreshButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Icon(
-        FontAwesomeIcons.syncAlt,
-        size: 30.0,
+        FontAwesomeIcons.locationArrow,
+        size: 35.0,
         color: kPrimaryFontColor,
       ),
       onTap: onPress,

@@ -33,6 +33,8 @@ class _ErrorScreenState extends State<ErrorScreen> {
             ),
             SizedBox(height: 40.0),
             RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
                 child: Text(
                   'Try again',
                   style: kRegularTextStyle.copyWith(
@@ -40,7 +42,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
                     color: kPrimaryFontColor,
                   ),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
                 elevation: 0.0,
                 color: kTryAgainButtonColor,
                 onPressed: () async {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-const kBackgroundColor = Color(0xFF222831);
+const kBackgroundColor = Color(0xFF424242);
 const kPrimaryFontColor = Color(0xFFf0f5f9);
 const kSecondaryFontColor = Color(0xFFc9d6df);
-const kAlertIconColor = Color(0xFFea5455);
-const kTryAgainButtonColor = Color(0xFF3ec1d3);
+const kAlertIconColor = Color(0xFFd50000);
+const kTryAgainButtonColor = Color(0xFF6d6d6d);
 
 const kRegularTextStyle = TextStyle(
   fontFamily: 'Monserrat',

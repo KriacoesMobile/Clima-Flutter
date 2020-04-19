@@ -18,7 +18,7 @@ class WeatherInformation extends StatefulWidget {
 
 class _WeatherInformationState extends State<WeatherInformation> {
   double temperature;
-  String feelsLike;
+  double feelsLike;
   String cityName;
   String description;
   String userInput;
@@ -34,7 +34,7 @@ class _WeatherInformationState extends State<WeatherInformation> {
       setState(() {
         temperature = weatherData['main']['temp'];
         cityName = weatherData['name'];
-        feelsLike = weatherData['main']['feels_like'].toString();
+        feelsLike = weatherData['main']['feels_like'];
         description = weatherData['weather'][0]['description'];
       });
     } else {
@@ -56,79 +56,9 @@ class _WeatherInformationState extends State<WeatherInformation> {
             children: <Widget>[
               Expanded(
                 flex: 1,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          getCurrentDateTime(),
-                          style: kRegularTextStyle.copyWith(
-                            fontSize: 20.0,
-                            color: kSecondaryFontColor,
-                          ),
-                        ),
-                        SizedBox(height: 6.0),
-                        Text(
-                          cityName,
-                          style: kExtraBoldTextStyle.copyWith(
-                            fontSize: 20.0,
-                            color: kPrimaryFontColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                    RefreshButton(onPress: () async {
-                      var weatherData = WeatherData().getLocationData();
-                      updateData(weatherData);
-                    }),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      '${temperature.round()}º',
-                      style: kExtraBoldTextStyle.copyWith(
-                        fontSize: 80.0,
-                        color: kPrimaryFontColor,
-                      ),
-                    ),
-                    Text(
-                      capitalize(description),
-                      style: kRegularTextStyle.copyWith(
-                        fontSize: 45.0,
-                        color: kPrimaryFontColor,
-                      ),
-                    ),
-                    SizedBox(height: 15.0),
-                    Text(
-                      'Feels like $feelsLikeº',
-                      style: kRegularTextStyle.copyWith(
-                        fontSize: 20.0,
-                        color: kSecondaryFontColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Search for other locations',
-                      style: kRegularTextStyle.copyWith(
-                        fontSize: 20.0,
-                        color: kPrimaryFontColor,
-                      ),
-                    ),
                     SizedBox(height: 20.0),
                     Row(
                       children: <Widget>[
@@ -139,7 +69,7 @@ class _WeatherInformationState extends State<WeatherInformation> {
                               textCapitalization: TextCapitalization.sentences,
                               enableSuggestions: true,
                               enableInteractiveSelection: true,
-                              textAlign: TextAlign.center,
+                              textAlign: TextAlign.start,
                               showCursor: false,
                               style: kRegularTextStyle.copyWith(
                                   fontSize: 18.0, color: kBackgroundColor),
@@ -174,7 +104,70 @@ class _WeatherInformationState extends State<WeatherInformation> {
                     )
                   ],
                 ),
-              )
+              ),
+              Expanded(
+                flex: 1,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          getCurrentDateTime(),
+                          style: kRegularTextStyle.copyWith(
+                            fontSize: 20.0,
+                            color: kSecondaryFontColor,
+                          ),
+                        ),
+                        SizedBox(height: 6.0),
+                        Text(
+                          cityName,
+                          style: kExtraBoldTextStyle.copyWith(
+                            fontSize: 20.0,
+                            color: kPrimaryFontColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    RefreshButton(onPress: () async {
+                      var weatherData = await WeatherData().getLocationData();
+                      updateData(weatherData);
+                    }),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      '${temperature.roundToDouble().round()}º',
+                      style: kExtraBoldTextStyle.copyWith(
+                        fontSize: 80.0,
+                        color: kPrimaryFontColor,
+                      ),
+                    ),
+                    Text(
+                      capitalize(description),
+                      style: kRegularTextStyle.copyWith(
+                        fontSize: 45.0,
+                        color: kPrimaryFontColor,
+                      ),
+                    ),
+                    SizedBox(height: 15.0),
+                    Text(
+                      'Feels like ${feelsLike.roundToDouble().round()}º',
+                      style: kRegularTextStyle.copyWith(
+                        fontSize: 20.0,
+                        color: kSecondaryFontColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

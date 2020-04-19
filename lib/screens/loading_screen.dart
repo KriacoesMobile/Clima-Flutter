@@ -3,7 +3,6 @@ import 'package:clima/screens/weather_information.dart';
 import 'package:clima/services/weather_data.dart';
 import 'package:clima/utilities/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -37,13 +36,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Icon(
-              FontAwesomeIcons.cloudMoon,
-              size: 100.0,
-              color: kPrimaryFontColor,
+            Image.asset(
+              'assets/launcher/foreground.png',
+              scale: 6.0,
             ),
-            SizedBox(height: 25.0),
+            SizedBox(height: 10.0),
             Text(
               'Clima',
               style: kRegularTextStyle.copyWith(
