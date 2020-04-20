@@ -1,4 +1,4 @@
-package com.pedrolemoz.clima.clima
+package com.pedrolemoz.clima
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
