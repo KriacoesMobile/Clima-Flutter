@@ -1,6 +1,6 @@
 # clima
 
-Check the current weather
+A new Flutter project.
 
 ## Getting Started
 

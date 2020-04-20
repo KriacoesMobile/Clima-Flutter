@@ -16,8 +16,7 @@ dependencies:
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
-  flutter_launcher_icons:
-  
+  flutter_launcher_icons: ^0.7.4
   flutter_test:
     sdk: flutter
 
@@ -29,11 +28,14 @@ flutter_icons:
   adaptive_icon_background: assets/launcher/background.png
   adaptive_icon_foreground: assets/launcher/foreground.png
 
+module:
+  androidX: true
+
 flutter:
   uses-material-design: true
 
   assets:
-  - assets/
+  - assets/launcher/
 
   fonts:
   - family: Monserrat
